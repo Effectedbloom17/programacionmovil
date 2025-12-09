@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/widgets/entrada.dart';
 import 'package:flutter_application_2/servicios/firabase_con.dart';
-import 'package:flutter_application_2/pantallas/pantallas.dart'; // Asegúrate de que aquí esté PantallaInicio
+import 'package:flutter_application_2/pantallas/pantallas.dart';
 
 class Registro extends StatelessWidget {
   const Registro({super.key});

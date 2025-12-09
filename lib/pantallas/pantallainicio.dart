@@ -24,6 +24,10 @@ class _PantallaInicioState extends State<PantallaInicio> {
   ];
   IconData _userIcon = Icons.person_pin;
 
+  // 💡 MENSAJE DE PROPÓSITO ÚNICO
+  static const String _purposeMessage =
+      'Esta aplicación tiene como objetivo advertir a los ciudadanos sobre los percances más actuales, y que ustedes mismos puedan participar con reportes en tiempo real.';
+
   @override
   void initState() {
     super.initState();
@@ -89,10 +93,35 @@ class _PantallaInicioState extends State<PantallaInicio> {
     );
   }
 
+  // ❓ NUEVA FUNCIÓN: Muestra el diálogo con el propósito de la app
+  void _showPurposeAlert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          icon: const Icon(Icons.info_outline, size: 30),
+          title: const Text('Propósito de Alerta MX'),
+          content: const Text(
+            _purposeMessage,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('ENTENDIDO'),
+              onPressed: () {
+                Navigator.of(dialogContext).pop(); // Cierra el diálogo
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).primaryColor;
-    final Color cardBackground = Colors.grey[100]!;
     final bool isLoggedIn = _userData != null;
 
     return Scaffold(
@@ -101,6 +130,14 @@ class _PantallaInicioState extends State<PantallaInicio> {
       appBar: AppBar(
         title: const Text('Alerta MX'),
         actions: [
+          // 💡 1. Botón de Propósito (Siempre visible, signo de interrogación)
+          IconButton(
+            icon: const Icon(Icons.help_outline),
+            tooltip: 'Propósito de la aplicación',
+            onPressed: () => _showPurposeAlert(context),
+          ),
+
+          // 💡 2. Botón de Acceso/Registro (Mantiene su función)
           Builder(
             builder: (context) {
               return IconButton(
@@ -116,49 +153,11 @@ class _PantallaInicioState extends State<PantallaInicio> {
         ],
       ),
 
-      // BODY (No necesita cambios)
+      // BODY: Se elimina el widget fijo de propósito y solo queda la lista
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Widget de Propósito de la Aplicación (Fijo)
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 8.0,
-            ),
-            child: Card(
-              color: cardBackground,
-              elevation: 1,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                side: BorderSide(
-                  color: primaryColor.withOpacity(0.5),
-                  width: 1,
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(Icons.warning_amber, color: primaryColor, size: 24),
-                    const SizedBox(width: 10),
-                    const Expanded(
-                      child: Text(
-                        'Esta aplicación tiene como objetivo advertir a los ciudadanos sobre los percances más actuales, y que ustedes mismos puedan participar con reportes en tiempo real.',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500,
-                          height: 1.4,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          // ❌ SE QUITA EL WIDGET DE PROPÓSITO QUE ESTABA AQUÍ
 
           // Lista de publicaciones
           Expanded(
