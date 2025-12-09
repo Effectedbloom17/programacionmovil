@@ -12,40 +12,10 @@ class AppRouter {
       pantalla: PantallaInicio(),
     ),
     OpcionesModelo(
-      ruta: 'listview1',
-      icono: Icons.label_important_outline,
-      nombre: "List View 1",
-      pantalla: Listview1(),
-    ),
-    OpcionesModelo(
-      ruta: 'listview2',
-      icono: Icons.airline_seat_legroom_extra_outlined,
-      nombre: "List View 2",
-      pantalla: Listview2(),
-    ),
-    OpcionesModelo(
-      ruta: 'cardview',
-      icono: Icons.card_giftcard,
-      nombre: "CardViews",
-      pantalla: CardV(),
-    ),
-    OpcionesModelo(
-      ruta: 'alerta',
-      icono: Icons.accessible_forward_sharp,
-      nombre: "Alerta",
-      pantalla: Alerta(),
-    ),
-    OpcionesModelo(
-      ruta: 'avatar',
-      icono: Icons.align_vertical_bottom_sharp,
-      nombre: "Avatar Circle",
-      pantalla: Avatar(),
-    ),
-    OpcionesModelo(
-      ruta: 'animacion',
-      icono: Icons.account_circle_sharp,
-      nombre: "Animacion",
-      pantalla: Animacion(),
+      ruta: 'pantallainicio',
+      icono: Icons.home,
+      nombre: "Principal",
+      pantalla: PantallaInicio(),
     ),
   ];
   static Map<String, Widget Function(BuildContext)> routes() {
@@ -59,7 +29,7 @@ class AppRouter {
   static Route<dynamic>? onGenerateRoute1(RouteSettings s) {
     return MaterialPageRoute(
       builder: (context) {
-        return Listview1();
+        return PantallaInicio();
       },
     );
   }

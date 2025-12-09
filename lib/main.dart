@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/pantallas/pantallainicio.dart';
 import 'package:flutter_application_2/pantallas/pantallas.dart';
 import 'package:flutter_application_2/rutas/router.dart';
 import 'package:flutter_application_2/theme/tema.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: Listview2(),
+      home: PantallaInicio(),
       initialRoute: AppRouter.initialRoute,
       routes: AppRouter.routes(),
       onGenerateRoute: (settings) => AppRouter.onGenerateRoute1(settings),

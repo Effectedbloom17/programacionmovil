@@ -1,10 +1,4 @@
-export 'package:flutter_application_2/pantallas/animacion.dart';
-export 'package:flutter_application_2/pantallas/avatar.dart';
-export 'package:flutter_application_2/pantallas/alerta.dart';
-export 'package:flutter_application_2/widgets/tarjeta2.dart';
-export 'package:flutter_application_2/widgets/tarjeta1.dart';
-export 'package:flutter_application_2/pantallas/card.dart';
 export 'package:flutter_application_2/pantallas/pantallainicio.dart';
-export 'package:flutter_application_2/pantallas/listview1.dart';
-export 'package:flutter_application_2/pantallas/listview2.dart';
-import 'package:flutter_application_2/pantallas/formulario.dart';
+export 'package:flutter_application_2/pantallas/formulario.dart';
+export 'package:flutter_application_2/pantallas/registro.dart';
+export 'package:flutter_application_2/pantallas/login.dart';
