@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/modelo/opcionesModelo.dart';
-import 'package:flutter_application_2/pantallas/formulario.dart';
 import 'package:flutter_application_2/pantallas/pantallas.dart';
 
 class AppRouter {
@@ -47,12 +46,6 @@ class AppRouter {
       icono: Icons.account_circle_sharp,
       nombre: "Animacion",
       pantalla: Animacion(),
-    ),
-    OpcionesModelo(
-      ruta: 'formulario',
-      icono: Icons.dynamic_form,
-      nombre: "Formulario",
-      pantalla: Formulario(),
     ),
   ];
   static Map<String, Widget Function(BuildContext)> routes() {
