@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_2/servicios/firabase_con.dart';
 
 class Consultar extends StatefulWidget {
-
   const Consultar({Key? key}) : super(key: key);
 
   @override
@@ -23,6 +22,7 @@ class _ConsultarState extends State<Consultar> {
     super.initState();
     cargarDatos();
   }
+
   void cargarDatos() async {
     var datos = await getPublicaciones();
 
@@ -42,7 +42,6 @@ class _ConsultarState extends State<Consultar> {
     if (consulta.isEmpty) {
       resultados = todosLosUsuarios;
     } else {
-
       String input = consulta.toLowerCase();
 
       for (var usuario in todosLosUsuarios) {
@@ -63,9 +62,7 @@ class _ConsultarState extends State<Consultar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Consulta de Personal"),
-      ),
+      appBar: AppBar(title: Text("Consulta de Personal")),
       body: Column(
         children: [
           Padding(
@@ -86,9 +83,7 @@ class _ConsultarState extends State<Consultar> {
             ),
           ),
 
-          Expanded(
-            child: _construirCuerpoLista(),
-          ),
+          Expanded(child: _construirCuerpoLista()),
         ],
       ),
     );
@@ -96,13 +91,9 @@ class _ConsultarState extends State<Consultar> {
 
   Widget _construirCuerpoLista() {
     if (cargando) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
+      return Center(child: CircularProgressIndicator());
     } else if (usuariosFiltrados.isEmpty) {
-      return Center(
-        child: Text("No se encontraron resultados"),
-      );
+      return Center(child: Text("No se encontraron resultados"));
     } else {
       return ListView.builder(
         itemCount: usuariosFiltrados.length,
@@ -113,13 +104,11 @@ class _ConsultarState extends State<Consultar> {
           String Tipo = "Tipo: " + usuario['tipo'].toString();
           String Tiempo = "Tiempo: " + usuario['tiempo'].toString();
           String ImagenUrl = "ImagenUrl: " + usuario['imagenUrl'].toString();
-          String Descripcion = "Descripcion: " + usuario['descripcion'].toString();
+          String Descripcion =
+              "Descripcion: " + usuario['descripcion'].toString();
 
           return Card(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 15,
-              vertical: 8,
-            ),
+            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
             elevation: 4,
             child: Padding(
               padding: const EdgeInsets.all(12.0),
