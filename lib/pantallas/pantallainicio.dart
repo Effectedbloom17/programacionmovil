@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/pantallas/formulario.dart';
 import 'package:flutter_application_2/widgets/post_card.dart';
 import 'package:flutter_application_2/servicios/firabase_con.dart';
 
@@ -99,12 +100,27 @@ class PantallaInicio extends StatelessWidget {
             ),
           ),
         ],
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add_alert),
-      ),
+      ),floatingActionButton: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        FloatingActionButton(
+          heroTag: 'alertaBtn',
+          onPressed: () {},
+          child: const Icon(Icons.add_alert),
+        ),
+        const SizedBox(height: 10), 
+        FloatingActionButton( heroTag: 'Agregar',
+        onPressed: () {
+          Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Formulario(),
+                ),
+              );
+        },
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.add),
+        ),],),
     );
   }
 }

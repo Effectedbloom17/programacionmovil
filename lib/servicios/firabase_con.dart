@@ -25,3 +25,32 @@ Future<List<Map<String, dynamic>>> getPublicaciones() async {
 
   return publicaciones;
 }
+
+Future<void> agregarPublicacion(Map<String, dynamic> dts) async {
+  await db.collection("publicaciones").add(dts);
+}
+
+Future<void>actualizar(String usuario, String descripcion, String tipo) async{
+  final dts=await getPublicaciones();
+  for(var d in dts){
+    if (d["usuario"]==usuario) {
+      var ud=d["id"];
+      await db.collection("publicaciones").doc(ud).update({
+        "usuario":d["usuario"],
+        "descripcion":descripcion,
+        "imagenUrl":d["imagenUrl"],
+        "tiempo":d["tiempo"],
+        "tipo":tipo,});
+    }
+  } 
+}
+
+Future<void> borrarDatos(String usuario)async{
+  final dts=await getPublicaciones();
+  for(var d in dts){
+    if (d["usuario"]==usuario) {
+      var ud=d["id"];
+      await db.collection("publicaciones").doc(ud).delete();
+    }
+  }
+}

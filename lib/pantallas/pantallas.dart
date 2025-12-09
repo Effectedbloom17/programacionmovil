@@ -7,3 +7,4 @@ export 'package:flutter_application_2/pantallas/card.dart';
 export 'package:flutter_application_2/pantallas/pantallainicio.dart';
 export 'package:flutter_application_2/pantallas/listview1.dart';
 export 'package:flutter_application_2/pantallas/listview2.dart';
+import 'package:flutter_application_2/pantallas/formulario.dart';
