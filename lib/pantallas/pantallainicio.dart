@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/widgets/post_card.dart';
 import 'package:flutter_application_2/servicios/firabase_con.dart';
-// Asegúrate de que importas Registro, Login y Formulario
 import 'package:flutter_application_2/pantallas/pantallas.dart';
 import 'package:flutter_application_2/pantallas/login.dart';
 
