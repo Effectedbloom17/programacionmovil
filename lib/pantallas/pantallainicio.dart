@@ -1,4 +1,4 @@
-// Archivo: pantallainicio.dart (Corregido y Actualizado)
+// Archivo: pantallainicio.dart
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/widgets/post_card.dart';
@@ -23,7 +23,6 @@ class _PantallaInicioState extends State<PantallaInicio> {
   ];
   IconData _userIcon = Icons.person_pin;
 
-  // 💡 MENSAJE DE PROPÓSITO ÚNICO
   static const String _purposeMessage =
       'Esta aplicación tiene como objetivo advertir a los ciudadanos sobre los percances más actuales, y que ustedes mismos puedan participar con reportes en tiempo real.';
 
@@ -44,18 +43,35 @@ class _PantallaInicioState extends State<PantallaInicio> {
     }
   }
 
-  // 🚀 FUNCIÓN MODIFICADA PARA MANEJAR PERFIL/ACCESO
   void _handleProfileButton(BuildContext context) {
     if (_userData != null) {
-      // Si está logueado, abre el menú lateral (Drawer)
       Scaffold.of(context).openEndDrawer();
     } else {
-      // Si NO está logueado, muestra el diálogo de opciones
       _showAccessOptions(context);
     }
   }
 
-  // 🎁 NUEVO WIDGET: Diálogo para elegir Iniciar Sesión o Registrarse
+  Route _createSlideRoute(Widget page) {
+    return PageRouteBuilder(
+      transitionDuration: const Duration(milliseconds: 500), 
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0); 
+        const end = Offset.zero;      
+        const curve = Curves.easeOut; 
+
+        var tween = Tween(begin: begin, end: end).chain(
+          CurveTween(curve: curve),
+        );
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
   void _showAccessOptions(BuildContext context) {
     showDialog(
       context: context,
@@ -69,21 +85,21 @@ class _PantallaInicioState extends State<PantallaInicio> {
             TextButton(
               child: const Text('REGISTRARSE'),
               onPressed: () {
-                Navigator.of(dialogContext).pop(); // Cierra el diálogo
+                Navigator.of(dialogContext).pop();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Registro()),
-                ).then((_) => _loadUserData()); // Recarga al volver
+                  _createSlideRoute(const Registro()),
+                ).then((_) => _loadUserData());
               },
             ),
             ElevatedButton(
               child: const Text('INICIAR SESIÓN'),
               onPressed: () {
-                Navigator.of(dialogContext).pop(); // Cierra el diálogo
+                Navigator.of(dialogContext).pop();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Login()),
-                ).then((_) => _loadUserData()); // Recarga al volver
+                  _createSlideRoute(const Login()),
+                ).then((_) => _loadUserData());
               },
             ),
           ],
@@ -92,7 +108,6 @@ class _PantallaInicioState extends State<PantallaInicio> {
     );
   }
 
-  // ❓ NUEVA FUNCIÓN: Muestra el diálogo con el propósito de la app
   void _showPurposeAlert(BuildContext context) {
     showDialog(
       context: context,
@@ -109,7 +124,7 @@ class _PantallaInicioState extends State<PantallaInicio> {
             TextButton(
               child: const Text('ENTENDIDO'),
               onPressed: () {
-                Navigator.of(dialogContext).pop(); // Cierra el diálogo
+                Navigator.of(dialogContext).pop();
               },
             ),
           ],
@@ -129,14 +144,12 @@ class _PantallaInicioState extends State<PantallaInicio> {
       appBar: AppBar(
         title: const Text('Alerta MX'),
         actions: [
-          // 💡 1. Botón de Propósito (Siempre visible, signo de interrogación)
           IconButton(
             icon: const Icon(Icons.help_outline),
             tooltip: 'Propósito de la aplicación',
             onPressed: () => _showPurposeAlert(context),
           ),
 
-          // 💡 2. Botón de Acceso/Registro (Mantiene su función)
           Builder(
             builder: (context) {
               return IconButton(
@@ -152,13 +165,9 @@ class _PantallaInicioState extends State<PantallaInicio> {
         ],
       ),
 
-      // BODY: Se elimina el widget fijo de propósito y solo queda la lista
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ❌ SE QUITA EL WIDGET DE PROPÓSITO QUE ESTABA AQUÍ
-
-          // Lista de publicaciones
           Expanded(
             child: FutureBuilder<List<Map<String, dynamic>>>(
               future: getPublicaciones(),
@@ -191,7 +200,6 @@ class _PantallaInicioState extends State<PantallaInicio> {
         ],
       ),
 
-      // Floating Action Button (Solo si está logueado)
       floatingActionButton: isLoggedIn
           ? Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -207,9 +215,7 @@ class _PantallaInicioState extends State<PantallaInicio> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const Formulario(),
-                      ),
+                      _createSlideRoute(const Formulario()),
                     );
                   },
                   backgroundColor: Colors.green,
@@ -221,7 +227,6 @@ class _PantallaInicioState extends State<PantallaInicio> {
     );
   }
 
-  // Función que construye el Drawer con la información del usuario (No necesita cambios)
   Widget _buildUserDrawer(BuildContext context, Color primaryColor) {
     return Drawer(
       child: ListView(
